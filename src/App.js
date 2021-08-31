@@ -1,12 +1,25 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import logo from "./logo.svg";
 import "./App.css";
 
-import axios from "axios";
+function App() {
+  const [message, setMessage] = useState("");
 
-async function App() {
-  const serverResponse = await axios.get(
-    "https://jkuat-tie-bookings-backend.herokuapp.com/"
-  );
+  const fetchMessage = async () => {
+    const res = await axios.get(
+      "https://jkuat-tie-bookings-backend.herokuapp.com/"
+    );
+    setMessage(res.data.message);
+  };
+
+  useEffect(() => {
+    if (!message) {
+      fetchMessage();
+    }
+  });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +27,7 @@ async function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <p>{serverResponse.data}</p>
+        <p>{message}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
