@@ -1,7 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-function App() {
+import axios from "axios";
+
+async function App() {
+  const serverResponse = await axios.get(
+    "https://jkuat-tie-bookings-backend.herokuapp.com/"
+  );
   return (
     <div className="App">
       <header className="App-header">
@@ -9,6 +14,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <p>{serverResponse.data}</p>
         <a
           className="App-link"
           href="https://reactjs.org"
